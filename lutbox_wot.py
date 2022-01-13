@@ -3,7 +3,7 @@ from random import shuffle
 from random import *
 from tkinter.messagebox import showinfo, showerror
 from tkinter import messagebox
-from lutbox.priz import *
+from priz import *
 import random
 
 
@@ -92,7 +92,7 @@ class Lutbox:
         return self.tanks_low.config(text=prize, bg='#000000', fg='#FF0404')
 
     def open_add_prize(self, prize: str):
-        self.add_prize.config(text=f'{prize}', bg='#000000', fg='#FF0404')
+        return self.add_prize.config(text=f'{prize}', bg='#000000', fg='#FF0404')
 
     def clear_screen(self):
          self.tanks_high.config(text='', bg='#B72E8E', fg='#FF0404')
@@ -100,14 +100,7 @@ class Lutbox:
          self.tanks_low.config(text='', bg='#B72E8E', fg='#FF0404')
          self.add_prize.config(text='', bg='#B72E8E', fg='#FF0404')
 
-    # def clear_prize(self):
-    #     self.tanks_high.config(text='')
-    #     self.
 
-
-
-        # tk.Button('Розыгрыш',bg='#000000', fg='#FF0404').grid(row=1, column=1, stick='wens', padx=5, pady=10)
-        # l = tk.Label(win_2, text='TopLEVEL', font='Arial 15 bold', fg='brown').pack()
 
     def create_label(self):
         """Создание лейблов наличия коробок"""
@@ -200,34 +193,32 @@ class Lutbox:
         if year == 1:
             self.box_ng.config(text=f"В наличии Новогодних \n коробок ({Gamer.lutbox[Lutbox.years[year]]})")
             print(type(Gamer.lutbox[Lutbox.years[year]]))
-            # self.sum_box(Gamer.lutbox[Lutbox.years[year]])
+
         if year == 2:
             self.box_christmas.config(text=f"В наличии Рождественских \n коробок ({Gamer.lutbox[Lutbox.years[year]]})")
-            # self.sum_box(Gamer.lutbox[Lutbox.years[year]])
+
         if year == 3:
             self.box_east.config(text=f"В наличии Восточных \n коробок ({Gamer.lutbox[Lutbox.years[year]]})")
-            # self.sum_box(Gamer.lutbox[Lutbox.years[year]])
+
         if year == 4:
             self.box_magic.config(text=f"В наличии Волшебных \n коробок ({Gamer.lutbox[Lutbox.years[year]]})")
-            # self.sum_box(Gamer.lutbox[Lutbox.years[year]])
+
         self.sum_box(box)
         return Gamer.lutbox[Lutbox.years[year]]
 
     def reduce_nov_god_box(self):
         if Gamer.lutbox['nov_god']>0:
             Gamer.lutbox['nov_god']-=1
-            self.box_ng.config(text=f"В наличии Новогодних \n коробок ({Gamer.lutbox['nov_god']})")
+            return self.box_ng.config(text=f"В наличии Новогодних \n коробок ({Gamer.lutbox['nov_god']})")
         elif Gamer.lutbox['christ_year']>0:
             Gamer.lutbox['christ_year']-=1
-            self.box_christmas.config(text=f"В наличии Рождественских \n коробок ({Gamer.lutbox['christ_year']})")
+            return self.box_christmas.config(text=f"В наличии Рождественских \n коробок ({Gamer.lutbox['christ_year']})")
         elif Gamer.lutbox['east_year']>0:
             Gamer.lutbox['east_year']-=1
-            self.box_east.config(text=f"В наличии Восточных \n коробок ({ Gamer.lutbox['east_year']})")
+            return self.box_east.config(text=f"В наличии Восточных \n коробок ({ Gamer.lutbox['east_year']})")
         elif Gamer.lutbox['magic_year']>0:
             Gamer.lutbox['magic_year']-=1
-            self.box_magic.config(text=f"В наличии Волшебных \n коробок ({Gamer.lutbox['magic_year']})")
-
-
+            return self.box_magic.config(text=f"В наличии Волшебных \n коробок ({Gamer.lutbox['magic_year']})")
 
     def start(self):
         self.create_label()
@@ -272,7 +263,7 @@ class Drop_items:
             Drop_items.count = 1
             print(prize_high_tank)
             messagebox.showinfo('Выйгрыш', f'Танк 8 уровня {prize_high_tank}')
-            Lutbox.open_prize(a,prize_high_tank)
+            return Lutbox.open_prize(a,prize_high_tank)
 
     def tanks_low_lvl(self):
         if random.random() <= 0.1166:
@@ -283,7 +274,7 @@ class Drop_items:
                 Gamer.tanks_low_lvl_2020[prize] += 1
                 Gamer.supply['gold'] += 1000
             print(prize)
-            Lutbox.open_tanks_low(a,prize)
+            return Lutbox.open_tanks_low(a,prize)
 
     def style3d(self):
         if random.random() <= 0.05:
@@ -309,12 +300,10 @@ class Drop_items:
             print(prize[1])
             if prize[2] in Gamer.supply:
                 Gamer.supply[prize[2]] += prize[0]
-            Lutbox.open_add_prize(a,prize[1])
+            return Lutbox.open_add_prize(a,prize[1])
 
     def drop(self):
-        # exit = ''
-        # while exit != 'Exit':
-        # while len(Gamer.tanks_high_lvl_2022)<10:
+
         if Gamer.sum_lutbox <= 0:
             Gamer.IS_GAME_OVER=False
 
