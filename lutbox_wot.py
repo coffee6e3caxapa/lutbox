@@ -179,7 +179,7 @@ class Lutbox:
 
     def add_box_nov_god(self, box: int, year: int):
         if box == 1 and Gamer.money >= 110:
-            Gamer.lutbox[Lutbox.years[year]] += box
+            Gamer.lutbox[Lutbox.years[year]] = Gamer.lutbox.get(Lutbox.years[year], 0)+1
             Gamer.money -= 110
             print(Gamer.money)
         elif box > 2 and box * 100 <= Gamer.money:
